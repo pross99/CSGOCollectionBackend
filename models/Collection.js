@@ -5,6 +5,7 @@ const CollectionSchema = new mongoose.Schema({
     wear: {type: String, required: true },
     float: {type: Number, required: true },
     userName: {type: Boolean, default: false},
+    rarity: {type: String, required},
     estimatedPrice: {type: Number, required: true},
     statTrack: {type: Boolean, default: false}
 },{collection: 'user'})
