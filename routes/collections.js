@@ -46,7 +46,7 @@ router.get("/:id", async(request,response) => {
   }
 })
 
-router.delete("/:id", async(request,response) => {
+router.delete("/delete/:id", async(request,response) => {
   
 
   try {
