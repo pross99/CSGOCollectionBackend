@@ -26,7 +26,7 @@ router.get("/search", async (request, response) => {
         response.json(items);
 
     } catch (err) {
-        response.json(500).json({error: err.message})
+        response.status.json(500).json({error: err.message})
     }
 })
 
