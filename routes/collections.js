@@ -59,7 +59,7 @@ router.delete("/delete/:id", async(request,response) => {
       return response.status(400).json({error: "Invalid ID!"})
     }
     
-   const item = await Collection.findByIdAndDelete(id);
+   const item = await Collection.findByIdAndDelete(new ObjectId(id));
 
      if (!item) {
       return response.status(404).json({ error: 'Item not found' });
