@@ -75,4 +75,32 @@ router.delete("/delete/:id", async(request,response) => {
   }
 })
 
+
+router.put("/:id", async(request, response) => {
+
+  try {
+
+    const {id} = request.params;
+
+     if (!ObjectId.isValid(id)) {
+      return response.status(400).json({error: "Invalid ID!"})
+    }
+    
+   const item = await Collection.findByIdAndUpdate(new ObjectId(id));
+
+     if (!item) {
+      return response.status(404).json({ error: 'Item not found' });
+    }
+    
+    // Return the item
+    response.status(200).json(item);
+
+     }
+     catch (err) {
+    console.error('Error fetching item:', err);
+    response.status(500).json({ error: 'Internal server error' });
+  }
+  
+})
+
 module.exports = router;
