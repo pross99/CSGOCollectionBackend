@@ -19,14 +19,19 @@ router.get("/search", async (request, response) => {
             return response.status(400).json({message: 'Please search for a skin name'});
         }
 
+        const cleanQuery = q.replace(/[^\w\s]/g, "").trim();
+
+        const words = cleanQuery.split(/\s+/).filter(Boolean);
+        const regex = new RegExp(words.join(".*"), "i");
+
         const items = await Item.find({
-            name: {$regex: q, $options: 'i'}
-        });
+          name: {$regex: regex},
+        })
 
         response.json(items);
 
     } catch (err) {
-        response.status.json(500).json({error: err.message})
+        response.status(500).json({error: err.message})
     }
 })
 
